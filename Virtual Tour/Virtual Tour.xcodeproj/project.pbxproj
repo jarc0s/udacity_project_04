@@ -8,12 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		8871B0E72396E59B000D89DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8871B0E62396E59B000D89DF /* AppDelegate.swift */; };
-		8871B0E92396E59B000D89DF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8871B0E82396E59B000D89DF /* ViewController.swift */; };
 		8871B0EC2396E59B000D89DF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8871B0EA2396E59B000D89DF /* Main.storyboard */; };
 		8871B0EE2396E59C000D89DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8871B0ED2396E59C000D89DF /* Assets.xcassets */; };
 		8871B0F12396E59C000D89DF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8871B0EF2396E59C000D89DF /* LaunchScreen.storyboard */; };
 		8871B0FC2396E59C000D89DF /* Virtual_TourTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8871B0FB2396E59C000D89DF /* Virtual_TourTests.swift */; };
 		8871B1072396E59C000D89DF /* Virtual_TourUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8871B1062396E59C000D89DF /* Virtual_TourUITests.swift */; };
+		8871B1162396EA40000D89DF /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8871B1152396EA40000D89DF /* MapViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +36,6 @@
 /* Begin PBXFileReference section */
 		8871B0E32396E59B000D89DF /* Virtual Tour.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Virtual Tour.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8871B0E62396E59B000D89DF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8871B0E82396E59B000D89DF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		8871B0EB2396E59B000D89DF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8871B0ED2396E59C000D89DF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8871B0F02396E59C000D89DF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -47,6 +46,7 @@
 		8871B1022396E59C000D89DF /* Virtual TourUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Virtual TourUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8871B1062396E59C000D89DF /* Virtual_TourUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Virtual_TourUITests.swift; sourceTree = "<group>"; };
 		8871B1082396E59C000D89DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8871B1152396EA40000D89DF /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,8 +97,8 @@
 		8871B0E52396E59B000D89DF /* Virtual Tour */ = {
 			isa = PBXGroup;
 			children = (
+				8871B1142396E746000D89DF /* ViewControllers */,
 				8871B0E62396E59B000D89DF /* AppDelegate.swift */,
-				8871B0E82396E59B000D89DF /* ViewController.swift */,
 				8871B0EA2396E59B000D89DF /* Main.storyboard */,
 				8871B0ED2396E59C000D89DF /* Assets.xcassets */,
 				8871B0EF2396E59C000D89DF /* LaunchScreen.storyboard */,
@@ -123,6 +123,14 @@
 				8871B1082396E59C000D89DF /* Info.plist */,
 			);
 			path = "Virtual TourUITests";
+			sourceTree = "<group>";
+		};
+		8871B1142396E746000D89DF /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				8871B1152396EA40000D89DF /* MapViewController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -256,8 +264,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8871B0E92396E59B000D89DF /* ViewController.swift in Sources */,
 				8871B0E72396E59B000D89DF /* AppDelegate.swift in Sources */,
+				8871B1162396EA40000D89DF /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -363,7 +371,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -418,7 +426,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
