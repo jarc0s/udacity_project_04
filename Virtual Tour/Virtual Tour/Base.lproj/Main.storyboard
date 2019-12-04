@@ -26,27 +26,26 @@
                                     <outletCollection property="gestureRecognizers" destination="yCj-kc-jZy" appends="YES" id="IgU-KG-B0d"/>
                                 </connections>
                             </mapView>
-                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KVd-45-RMP">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap Pins to Delete" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tyC-G0-FbH">
                                 <rect key="frame" x="0.0" y="667" width="375" height="0.0"/>
-                                <color key="backgroundColor" red="0.91764705882352937" green="0.19607843137254902" blue="0.13725490196078433" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.90588235289999997" green="0.30196078430000001" blue="0.23921568630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" id="3Wh-6F-D0O"/>
+                                    <constraint firstAttribute="height" id="G1a-F5-Nzo"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                <state key="normal" title="Tap Pins to Delete">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                            </button>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="KVd-45-RMP" firstAttribute="bottom" secondItem="Rex-od-Suq" secondAttribute="bottom" id="1o1-3Z-6oH"/>
+                            <constraint firstItem="Rex-od-Suq" firstAttribute="trailing" secondItem="tyC-G0-FbH" secondAttribute="trailing" id="7Xq-Ad-FQ1"/>
+                            <constraint firstItem="tyC-G0-FbH" firstAttribute="leading" secondItem="Rex-od-Suq" secondAttribute="leading" id="AHf-Sx-IF6"/>
                             <constraint firstItem="Rex-od-Suq" firstAttribute="trailing" secondItem="lcC-pd-GRB" secondAttribute="trailing" id="L0W-lC-Pw9"/>
-                            <constraint firstItem="Rex-od-Suq" firstAttribute="trailing" secondItem="KVd-45-RMP" secondAttribute="trailing" id="QFJ-IX-zqf"/>
+                            <constraint firstItem="tyC-G0-FbH" firstAttribute="top" secondItem="lcC-pd-GRB" secondAttribute="bottom" id="V0d-pP-Kqv"/>
                             <constraint firstItem="lcC-pd-GRB" firstAttribute="leading" secondItem="Rex-od-Suq" secondAttribute="leading" id="eHZ-o0-L48"/>
-                            <constraint firstItem="KVd-45-RMP" firstAttribute="leading" secondItem="Rex-od-Suq" secondAttribute="leading" id="eL5-90-BA7"/>
-                            <constraint firstItem="KVd-45-RMP" firstAttribute="top" secondItem="lcC-pd-GRB" secondAttribute="bottom" id="gN9-dP-Tzi"/>
                             <constraint firstItem="lcC-pd-GRB" firstAttribute="top" secondItem="Rex-od-Suq" secondAttribute="top" id="snU-Lr-BU3"/>
+                            <constraint firstItem="Rex-od-Suq" firstAttribute="bottom" secondItem="tyC-G0-FbH" secondAttribute="bottom" id="zha-l4-Teo"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Rex-od-Suq"/>
                     </view>
@@ -58,8 +57,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="deletePinButtonHeightConstraint" destination="3Wh-6F-D0O" id="ley-6V-tcA"/>
                         <outlet property="editButton" destination="bRr-Yc-vyt" id="eaA-5e-ex1"/>
+                        <outlet property="labelDeleteHeightConstraint" destination="G1a-F5-Nzo" id="yVn-Zf-Gxw"/>
                         <outlet property="mapView" destination="lcC-pd-GRB" id="Vv8-a9-rYc"/>
                     </connections>
                 </viewController>
