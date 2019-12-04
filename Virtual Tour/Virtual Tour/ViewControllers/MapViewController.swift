@@ -16,7 +16,6 @@ class MapViewController: UIViewController {
     @IBOutlet weak var labelDeleteHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var editButton: UIBarButtonItem!
     
-    var pins: [Pin] = []
     var isDeletingPings = false
     var dataController: DataController!
     
@@ -25,12 +24,11 @@ class MapViewController: UIViewController {
         
         let fetchRequest: NSFetchRequest<Pin> = Pin.fetchRequest()
         if let result = try? dataController.viewContext.fetch(fetchRequest) {
-            pins = result
-            addPinsToMap()
+            addPinsToMap(pins: result)
         }
+        
+        //updateZoomRegion()
     }
-    
-    
     
     
     @IBAction func recognizeLongPress(_ sender: UILongPressGestureRecognizer) {
@@ -40,13 +38,17 @@ class MapViewController: UIViewController {
                 return
             }
             
-            // Get the coordinates of the point you pressed long.
             let location = sender.location(in: mapView)
             
-            // Convert location to CLLocationCoordinate2D.
             let myCoordinate: CLLocationCoordinate2D = mapView.convert(location, toCoordinateFrom: mapView)
             
-            addPinToMap(myCoordinate)
+            let pin = Pin(context: dataController.viewContext)
+            pin.latitude = myCoordinate.latitude
+            pin.longitude = myCoordinate.longitude
+            pin.creationDate = Date()
+            try? dataController.viewContext.save()
+            
+            addPinToMap(pinModel: pin)
         }
         
     }
@@ -55,12 +57,22 @@ class MapViewController: UIViewController {
     @IBAction func deletePinsAction(_ sender: UIBarButtonItem) {
         isDeletingPings = !isDeletingPings
         updateButtonDelete(isVisible: isDeletingPings)
-        editButton.title = isDeletingPings ? "Done" : "Edit"
+        
         deSelectAnnotations()
     }
     
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "segueToPhotoAlbum" {
+            if let photoAlbumViewController = segue.destination as? PhotoAlbumViewController, let pin = sender as? Pin {
+                photoAlbumViewController.pinModel = pin
+                photoAlbumViewController.dataController = dataController
+            }
+        }
+    }
+    
     private func updateButtonDelete(isVisible: Bool){
+        editButton.title = isDeletingPings ? "Done" : "Edit"
         self.animateButton(heightConstraint: isVisible ? 60 : 0)
     }
     
@@ -73,28 +85,20 @@ class MapViewController: UIViewController {
         }
     }
     
-    fileprivate func addPinToMap(_ myCoordinate: CLLocationCoordinate2D) {
-        // Generate pins.
-        let myPin: MKPointAnnotation = MKPointAnnotation()
+    private func addPinToMap(pinModel: Pin) {
         
-        // Set the coordinates.
-        myPin.coordinate = myCoordinate
+        let myCoordinate: CLLocationCoordinate2D = CLLocationCoordinate2D.init(latitude: pinModel.latitude, longitude: pinModel.longitude)
         
-        // Added pins to MapView.
-        mapView.addAnnotation(myPin)
+        let virtualTourPin: VirtualTourPointAnnotation = VirtualTourPointAnnotation(pinModel: pinModel)
         
-        //Store pin in core data
-        let pin = Pin(context: dataController.viewContext)
-        pin.latitude = myPin.coordinate.latitude
-        pin.longitude = myPin.coordinate.longitude
-        pin.creationDate = Date()
-        try? dataController.viewContext.save()
+        virtualTourPin.coordinate = myCoordinate
+        
+        mapView.addAnnotation(virtualTourPin)
     }
     
-    fileprivate func addPinsToMap(){
+    private func addPinsToMap(pins:[Pin] ){
         for pin in pins {
-            let myCoordinate: CLLocationCoordinate2D = CLLocationCoordinate2D.init(latitude: pin.latitude, longitude: pin.longitude)
-            addPinToMap(myCoordinate)
+            addPinToMap(pinModel: pin)
         }
     }
     
@@ -103,6 +107,20 @@ class MapViewController: UIViewController {
             mapView.deselectAnnotation(annotation, animated: false)
         }
     }
+    
+//    private func updateZoomRegion() {
+//        if let centerLatitude = UserDefaults.standard.value(forKey: "centerLatitude") as? Double, let centerLongitude = UserDefaults.standard.value(forKey: "centerLongitude") as? Double, let zoomRegion = UserDefaults.standard.value(forKey: "zoomRegion") as? Double {
+//            mapView.zoomAndCenter(on: CLLocationCoordinate2D.init(latitude: centerLatitude, longitude: centerLongitude),
+//                                  zoom: zoomRegion/100.0)
+//        }
+//    }
+//
+//    private func storeCurrentRegion() {
+//
+//        UserDefaults.standard.set(mapView.centerCoordinate.latitude, forKey: "centerLatitude")
+//        UserDefaults.standard.set(mapView.centerCoordinate.longitude, forKey: "centerLongitude")
+//        UserDefaults.standard.set(mapView.getZoom(), forKey:"zoomRegion")
+//    }
 }
 
 extension MapViewController: MKMapViewDelegate {
@@ -111,30 +129,31 @@ extension MapViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         let myPinIdentifier = "PinAnnotationIdentifier"
         
-        // Generate pins.
         let myPinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: myPinIdentifier)
         
-        // Add animation.
         myPinView.animatesDrop = true
         
-        // Display callouts.
         myPinView.canShowCallout = false
         
-        // Set annotation.
         myPinView.annotation = annotation
-        
-        print("latitude: \(annotation.coordinate.latitude), longitude: \(annotation.coordinate.longitude)")
         
         return myPinView
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        if isDeletingPings {
-            if let annotation = view.annotation {
+        
+        if let annotation = view.annotation as? VirtualTourPointAnnotation, let pinToDelete = annotation.pinModel {
+            if isDeletingPings {
                 mapView.removeAnnotation(annotation)
+                dataController.viewContext.delete(pinToDelete)
+                try? dataController.viewContext.save()
+            }else {
+                performSegue(withIdentifier: "segueToPhotoAlbum", sender: pinToDelete)
             }
-        }else {
-            print("selected: \(String(describing: view.annotation?.coordinate))")
         }
+    }
+    
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        //storeCurrentRegion()
     }
 }

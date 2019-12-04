@@ -16,6 +16,9 @@
 		8871B0FC2396E59C000D89DF /* Virtual_TourTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8871B0FB2396E59C000D89DF /* Virtual_TourTests.swift */; };
 		8871B1072396E59C000D89DF /* Virtual_TourUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8871B1062396E59C000D89DF /* Virtual_TourUITests.swift */; };
 		8871B1162396EA40000D89DF /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8871B1152396EA40000D89DF /* MapViewController.swift */; };
+		88D616C02398161E00D0A192 /* VirtualTourPointAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D616BF2398161E00D0A192 /* VirtualTourPointAnnotation.swift */; };
+		88D616C22398350E00D0A192 /* MapKit+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D616C12398350E00D0A192 /* MapKit+Extension.swift */; };
+		88D616C42398632500D0A192 /* PhotoAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D616C32398632500D0A192 /* PhotoAlbumViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +54,9 @@
 		8871B1062396E59C000D89DF /* Virtual_TourUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Virtual_TourUITests.swift; sourceTree = "<group>"; };
 		8871B1082396E59C000D89DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8871B1152396EA40000D89DF /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		88D616BF2398161E00D0A192 /* VirtualTourPointAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualTourPointAnnotation.swift; sourceTree = "<group>"; };
+		88D616C12398350E00D0A192 /* MapKit+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapKit+Extension.swift"; sourceTree = "<group>"; };
+		88D616C32398632500D0A192 /* PhotoAlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAlbumViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +89,8 @@
 			children = (
 				0D84092223976FD5007FBC3D /* VirtualTour.xcdatamodeld */,
 				0D8409252397795A007FBC3D /* DataController.swift */,
+				88D616BF2398161E00D0A192 /* VirtualTourPointAnnotation.swift */,
+				88D616C12398350E00D0A192 /* MapKit+Extension.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -143,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				8871B1152396EA40000D89DF /* MapViewController.swift */,
+				88D616C32398632500D0A192 /* PhotoAlbumViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -279,8 +288,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				8871B0E72396E59B000D89DF /* AppDelegate.swift in Sources */,
+				88D616C42398632500D0A192 /* PhotoAlbumViewController.swift in Sources */,
 				0D8409262397795A007FBC3D /* DataController.swift in Sources */,
 				8871B1162396EA40000D89DF /* MapViewController.swift in Sources */,
+				88D616C22398350E00D0A192 /* MapKit+Extension.swift in Sources */,
+				88D616C02398161E00D0A192 /* VirtualTourPointAnnotation.swift in Sources */,
 				0D84092423976FD5007FBC3D /* VirtualTour.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
