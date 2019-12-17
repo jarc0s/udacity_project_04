@@ -9,5 +9,10 @@
 import Foundation
 
 struct SearchParams {
-    var 
+    var lat: Double
+    var lon: Double
+    var radius: Int
+    var format: String
+    var nojsoncallback: String
+    var per_page: Int
 }

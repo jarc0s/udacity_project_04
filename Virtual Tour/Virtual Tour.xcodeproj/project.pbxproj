@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0D84092423976FD5007FBC3D /* VirtualTour.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0D84092223976FD5007FBC3D /* VirtualTour.xcdatamodeld */; };
 		0D8409262397795A007FBC3D /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8409252397795A007FBC3D /* DataController.swift */; };
+		8831A12D23A8127E00ECDB56 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8831A12C23A8127E00ECDB56 /* PhotoCollectionViewCell.swift */; };
 		88719322239EFF3700B31AE4 /* VTClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88719321239EFF3700B31AE4 /* VTClient.swift */; };
 		88719324239F03C900B31AE4 /* SearchParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88719323239F03C900B31AE4 /* SearchParams.swift */; };
 		8871B0E72396E59B000D89DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8871B0E62396E59B000D89DF /* AppDelegate.swift */; };
@@ -18,6 +19,10 @@
 		8871B0FC2396E59C000D89DF /* Virtual_TourTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8871B0FB2396E59C000D89DF /* Virtual_TourTests.swift */; };
 		8871B1072396E59C000D89DF /* Virtual_TourUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8871B1062396E59C000D89DF /* Virtual_TourUITests.swift */; };
 		8871B1162396EA40000D89DF /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8871B1152396EA40000D89DF /* MapViewController.swift */; };
+		88A09B8623A2BB4E003E82BE /* PhotoParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A09B8523A2BB4E003E82BE /* PhotoParams.swift */; };
+		88A09B8823A2C6A6003E82BE /* VTResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A09B8723A2C6A6003E82BE /* VTResponse.swift */; };
+		88A09B8D23A2CDE5003E82BE /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A09B8C23A2CDE5003E82BE /* SearchResult.swift */; };
+		88A09B8F23A2D0DF003E82BE /* PhotosResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A09B8E23A2D0DF003E82BE /* PhotosResult.swift */; };
 		88D616C02398161E00D0A192 /* VirtualTourPointAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D616BF2398161E00D0A192 /* VirtualTourPointAnnotation.swift */; };
 		88D616C22398350E00D0A192 /* MapKit+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D616C12398350E00D0A192 /* MapKit+Extension.swift */; };
 		88D616C42398632500D0A192 /* PhotoAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D616C32398632500D0A192 /* PhotoAlbumViewController.swift */; };
@@ -43,6 +48,7 @@
 /* Begin PBXFileReference section */
 		0D84092323976FD5007FBC3D /* VirtualTour.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = VirtualTour.xcdatamodel; sourceTree = "<group>"; };
 		0D8409252397795A007FBC3D /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		8831A12C23A8127E00ECDB56 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		88719321239EFF3700B31AE4 /* VTClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VTClient.swift; sourceTree = "<group>"; };
 		88719323239F03C900B31AE4 /* SearchParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchParams.swift; sourceTree = "<group>"; };
 		8871B0E32396E59B000D89DF /* Virtual Tour.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Virtual Tour.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -58,6 +64,10 @@
 		8871B1062396E59C000D89DF /* Virtual_TourUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Virtual_TourUITests.swift; sourceTree = "<group>"; };
 		8871B1082396E59C000D89DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8871B1152396EA40000D89DF /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		88A09B8523A2BB4E003E82BE /* PhotoParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoParams.swift; sourceTree = "<group>"; };
+		88A09B8723A2C6A6003E82BE /* VTResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VTResponse.swift; sourceTree = "<group>"; };
+		88A09B8C23A2CDE5003E82BE /* SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
+		88A09B8E23A2D0DF003E82BE /* PhotosResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosResult.swift; sourceTree = "<group>"; };
 		88D616BF2398161E00D0A192 /* VirtualTourPointAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualTourPointAnnotation.swift; sourceTree = "<group>"; };
 		88D616C12398350E00D0A192 /* MapKit+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapKit+Extension.swift"; sourceTree = "<group>"; };
 		88D616C32398632500D0A192 /* PhotoAlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAlbumViewController.swift; sourceTree = "<group>"; };
@@ -91,10 +101,19 @@
 		0D84092123976FB0007FBC3D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				88A09B8923A2CC1C003E82BE /* VTResponse */,
 				88719320239EFF1100B31AE4 /* VTClient */,
 				8871931F239EFF0100B31AE4 /* Data */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		8831A12B23A811F300ECDB56 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8831A12C23A8127E00ECDB56 /* PhotoCollectionViewCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		8871931F239EFF0100B31AE4 /* Data */ = {
@@ -113,6 +132,8 @@
 			children = (
 				88719321239EFF3700B31AE4 /* VTClient.swift */,
 				88719323239F03C900B31AE4 /* SearchParams.swift */,
+				88A09B8523A2BB4E003E82BE /* PhotoParams.swift */,
+				88A09B8723A2C6A6003E82BE /* VTResponse.swift */,
 			);
 			path = VTClient;
 			sourceTree = "<group>";
@@ -140,6 +161,7 @@
 		8871B0E52396E59B000D89DF /* Virtual Tour */ = {
 			isa = PBXGroup;
 			children = (
+				8831A12B23A811F300ECDB56 /* View */,
 				0D84092123976FB0007FBC3D /* Model */,
 				8871B1142396E746000D89DF /* ViewControllers */,
 				8871B0E62396E59B000D89DF /* AppDelegate.swift */,
@@ -176,6 +198,15 @@
 				88D616C32398632500D0A192 /* PhotoAlbumViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		88A09B8923A2CC1C003E82BE /* VTResponse */ = {
+			isa = PBXGroup;
+			children = (
+				88A09B8C23A2CDE5003E82BE /* SearchResult.swift */,
+				88A09B8E23A2D0DF003E82BE /* PhotosResult.swift */,
+			);
+			path = VTResponse;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -313,11 +344,16 @@
 				88D616C42398632500D0A192 /* PhotoAlbumViewController.swift in Sources */,
 				88719322239EFF3700B31AE4 /* VTClient.swift in Sources */,
 				0D8409262397795A007FBC3D /* DataController.swift in Sources */,
+				88A09B8623A2BB4E003E82BE /* PhotoParams.swift in Sources */,
 				8871B1162396EA40000D89DF /* MapViewController.swift in Sources */,
 				88D616C22398350E00D0A192 /* MapKit+Extension.swift in Sources */,
+				88A09B8D23A2CDE5003E82BE /* SearchResult.swift in Sources */,
+				88A09B8823A2C6A6003E82BE /* VTResponse.swift in Sources */,
 				88D616C02398161E00D0A192 /* VirtualTourPointAnnotation.swift in Sources */,
 				88719324239F03C900B31AE4 /* SearchParams.swift in Sources */,
+				8831A12D23A8127E00ECDB56 /* PhotoCollectionViewCell.swift in Sources */,
 				0D84092423976FD5007FBC3D /* VirtualTour.xcdatamodeld in Sources */,
+				88A09B8F23A2D0DF003E82BE /* PhotosResult.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

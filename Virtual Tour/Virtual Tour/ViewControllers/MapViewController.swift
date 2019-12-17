@@ -63,6 +63,7 @@ class MapViewController: UIViewController {
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        deSelectAnnotations()
         if segue.identifier == "segueToPhotoAlbum" {
             if let photoAlbumViewController = segue.destination as? PhotoAlbumViewController, let pin = sender as? Pin {
                 photoAlbumViewController.pinModel = pin
