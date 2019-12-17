@@ -18,5 +18,10 @@ class PhotoCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         contentLoader.layer.cornerRadius = 10
         contentLoader.layer.masksToBounds = true
+        self.backgroundColor = .darkGray
+        activityIndicator.transform = CGAffineTransform(scaleX: 2, y: 2)
     }
+    
+    
+    
 }

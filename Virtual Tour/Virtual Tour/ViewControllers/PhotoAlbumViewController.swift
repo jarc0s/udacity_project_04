@@ -20,6 +20,7 @@ class PhotoAlbumViewController: UIViewController {
     var pinModel: Pin!
     var dataController: DataController!
     var resource: [Photo] = [Photo]()
+
     
     private let itemsPerRow: CGFloat = 3
     private let reuseIdentifier = "PhotoCell"
@@ -64,7 +65,7 @@ class PhotoAlbumViewController: UIViewController {
     }
     
     private func searchForPhotos(){
-        let searchParams = SearchParams(lat: pinModel.latitude, lon: pinModel.longitude, radius: 10, format: "json", nojsoncallback: "1", per_page: 21)
+        let searchParams = SearchParams(lat: pinModel.latitude, lon: pinModel.longitude, radius: 5, format: "json", nojsoncallback: "1", per_page: 21)
         VTClient.getSearchPhotos(params: searchParams, completion: handleSearchResponse(phostosResult:error:))
     }
     
@@ -172,7 +173,10 @@ extension PhotoAlbumViewController: MKMapViewDelegate {
 }
 
 extension PhotoAlbumViewController: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let photo = resource[indexPath.row]
+        
+    }
 }
 
 
@@ -187,14 +191,98 @@ extension PhotoAlbumViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView
-            .dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! PhotoCollectionViewCell
-        cell.backgroundColor = .darkGray
-        cell.activityIndicator.transform = CGAffineTransform(scaleX: 2, y: 2)
+        
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: reuseIdentifier, for: indexPath) as? PhotoCollectionViewCell
+            else {
+                preconditionFailure("Invalid cell type")
+        }
+        
+        let photo = resource[indexPath.row]
+        
+        // 1
+        cell.activityIndicator.stopAnimating()
+        cell.contentLoader.isHidden = true
+        
+        // 2
+        if let imagePhoto = photo.imageData {
+            cell.imageView.image = UIImage(data: imagePhoto)
+            return cell
+        }
+        
+        // 3
+        performLargeImageFetch(photo: photo, cell: cell)
+        
+        
         // Configure the cell
         return cell
     }
     
+    fileprivate func performLargeImageFetch(photo: Photo, cell: PhotoCollectionViewCell){
+        
+        cell.activityIndicator.startAnimating()
+        cell.contentLoader.isHidden = false
+        
+        loadLargeImage(photo: photo) { [weak self] result in 
+            cell.activityIndicator.stopAnimating()
+            cell.contentLoader.isHidden = true
+            
+            switch result {
+            case .results(let photo):
+                cell.imageView.image = photo
+                return
+            case .error(_), .success(_):
+                cell.imageView.image = UIImage(named: "")
+                return
+            }
+            
+        }
+        
+    }
+    
+    
+    func loadLargeImage(photo: Photo, completion: @escaping (Result<UIImage>) -> Void) {
+        
+        guard let urlPhotoStr = photo.url, let urlPhoto = URL(string: urlPhotoStr) else {
+            DispatchQueue.main.async {
+                completion(Result.success(false))
+            }
+
+            return
+        }
+        
+        let loadRequest = URLRequest(url:urlPhoto)
+        
+        URLSession.shared.dataTask(with: loadRequest) { (data, response, error) in
+            if let error = error {
+                DispatchQueue.main.async {
+                    completion(Result.error(error))
+                }
+                return
+            }
+            
+            guard let data = data else {
+                DispatchQueue.main.async {
+                    completion(Result.success(false))
+                }
+                return
+            }
+            
+            guard let returnedImage = UIImage(data: data) else {
+                DispatchQueue.main.async {
+                    completion(Result.success(false))
+                }
+                return
+            }
+            
+            photo.imageData = data
+            DispatchQueue.main.async {
+                completion(Result.results(returnedImage))
+            }
+            try? self.dataController.viewContext.save()
+            
+            }.resume()
+    }
     
 }
 

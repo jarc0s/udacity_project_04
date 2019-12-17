@@ -26,6 +26,7 @@
 		88D616C02398161E00D0A192 /* VirtualTourPointAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D616BF2398161E00D0A192 /* VirtualTourPointAnnotation.swift */; };
 		88D616C22398350E00D0A192 /* MapKit+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D616C12398350E00D0A192 /* MapKit+Extension.swift */; };
 		88D616C42398632500D0A192 /* PhotoAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D616C32398632500D0A192 /* PhotoAlbumViewController.swift */; };
+		88D821A823A98F2C00F09F1C /* ResultPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D821A723A98F2C00F09F1C /* ResultPhoto.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,7 @@
 		88D616BF2398161E00D0A192 /* VirtualTourPointAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualTourPointAnnotation.swift; sourceTree = "<group>"; };
 		88D616C12398350E00D0A192 /* MapKit+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapKit+Extension.swift"; sourceTree = "<group>"; };
 		88D616C32398632500D0A192 /* PhotoAlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAlbumViewController.swift; sourceTree = "<group>"; };
+		88D821A723A98F2C00F09F1C /* ResultPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultPhoto.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +136,7 @@
 				88719323239F03C900B31AE4 /* SearchParams.swift */,
 				88A09B8523A2BB4E003E82BE /* PhotoParams.swift */,
 				88A09B8723A2C6A6003E82BE /* VTResponse.swift */,
+				88D821A723A98F2C00F09F1C /* ResultPhoto.swift */,
 			);
 			path = VTClient;
 			sourceTree = "<group>";
@@ -341,6 +344,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8871B0E72396E59B000D89DF /* AppDelegate.swift in Sources */,
+				88D821A823A98F2C00F09F1C /* ResultPhoto.swift in Sources */,
 				88D616C42398632500D0A192 /* PhotoAlbumViewController.swift in Sources */,
 				88719322239EFF3700B31AE4 /* VTClient.swift in Sources */,
 				0D8409262397795A007FBC3D /* DataController.swift in Sources */,
