@@ -65,12 +65,12 @@ class VTClient {
         return task
     }
     
-    class func getSearchPhotos(params: SearchParams, completion: @escaping(PhotosResult?, Error?) -> Void){
+    class func getSearchPhotos(params: SearchParams, pinModel: Pin, completion: @escaping(PhotosResult?, Error?, Pin) -> Void){
         _ = taskForGETRequest(url: Endpoints.searchPhoto(params).url, responseType: SearchResult.self) { response, error in
             if let response = response {
-                completion(response.photos, nil)
+                completion(response.photos, nil, pinModel)
             } else {
-                completion(nil, error)
+                completion(nil, error, pinModel)
             }
         }
     }

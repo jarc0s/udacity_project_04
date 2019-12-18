@@ -31,8 +31,8 @@ class PhotoAlbumViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setRegionMapView()
-        searchForPhotos()
+        //setRegionMapView()
+        //searchForPhotos()
         //getPhotoPages()
         getPhotosUrls()
     }
@@ -66,7 +66,7 @@ class PhotoAlbumViewController: UIViewController {
     
     private func searchForPhotos(){
         let searchParams = SearchParams(lat: pinModel.latitude, lon: pinModel.longitude, radius: 5, format: "json", nojsoncallback: "1", per_page: 21)
-        VTClient.getSearchPhotos(params: searchParams, completion: handleSearchResponse(phostosResult:error:))
+        //VTClient.getSearchPhotos(params: searchParams, completion: handleSearchResponse(phostosResult:error:))
     }
     
     func handleSearchResponse(phostosResult: PhotosResult?, error: Error?){

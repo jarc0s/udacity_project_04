@@ -95,6 +95,9 @@ class MapViewController: UIViewController {
         virtualTourPin.coordinate = myCoordinate
         
         mapView.addAnnotation(virtualTourPin)
+        
+        //Ask for photos in that place
+        getPhotosForPlace(pinModel: pinModel)
     }
     
     private func addPinsToMap(pins:[Pin] ){
@@ -109,19 +112,51 @@ class MapViewController: UIViewController {
         }
     }
     
-//    private func updateZoomRegion() {
-//        if let centerLatitude = UserDefaults.standard.value(forKey: "centerLatitude") as? Double, let centerLongitude = UserDefaults.standard.value(forKey: "centerLongitude") as? Double, let zoomRegion = UserDefaults.standard.value(forKey: "zoomRegion") as? Double {
-//            mapView.zoomAndCenter(on: CLLocationCoordinate2D.init(latitude: centerLatitude, longitude: centerLongitude),
-//                                  zoom: zoomRegion/100.0)
-//        }
-//    }
-//
-//    private func storeCurrentRegion() {
-//
-//        UserDefaults.standard.set(mapView.centerCoordinate.latitude, forKey: "centerLatitude")
-//        UserDefaults.standard.set(mapView.centerCoordinate.longitude, forKey: "centerLongitude")
-//        UserDefaults.standard.set(mapView.getZoom(), forKey:"zoomRegion")
-//    }
+    private func getPhotosForPlace(pinModel: Pin) {
+        let searchParams = SearchParams(lat: pinModel.latitude, lon: pinModel.longitude, radius: 5, format: "json", nojsoncallback: "1", per_page: 21)
+        VTClient.getSearchPhotos(params: searchParams, pinModel: pinModel, completion: handleSearchResponse(phostosResult:error:pinModel:))
+    }
+    
+    
+    func handleSearchResponse(phostosResult: PhotosResult?, error: Error?, pinModel: Pin){
+        if let result = phostosResult {
+            print(result.photo.count)
+            if Int(result.total) != 0 {
+                self.storePhotosOnPinLocation(result: result, pinModel: pinModel)
+            }
+        }else {
+            print("error: \(error?.localizedDescription ?? "")")
+        }
+    }
+    
+    func storePhotosOnPinLocation(result: PhotosResult, pinModel: Pin) {
+        
+        storePhotoPage(result, pinModel: pinModel)
+        storePhotos(result, pinModel: pinModel)
+    }
+    
+    fileprivate func storePhotoPage(_ result: PhotosResult, pinModel: Pin) {
+        let photoPage = PhotoPage(context: dataController.viewContext)
+        photoPage.page = Int64(result.page)
+        photoPage.pages = Int64(result.pages)
+        photoPage.perPage = Int64(result.perpage)
+        photoPage.total = Int64(result.total) ?? 0
+        photoPage.pin = pinModel
+        try? dataController.viewContext.save()
+    }
+    
+    fileprivate func storePhotos(_ result: PhotosResult, pinModel: Pin) {
+        
+        for photo in result.photo {
+            let photoModel = Photo(context: dataController.viewContext)
+            photoModel.creationDate = Date()
+            photoModel.url = "https://farm\(photo.farm).staticflickr.com/\(photo.server)/\(photo.id)_\(photo.secret)_c.jpg"
+            photoModel.pin = pinModel
+            try? dataController.viewContext.save()
+        }
+        
+    }
+    
 }
 
 extension MapViewController: MKMapViewDelegate {
