@@ -23,6 +23,7 @@
 		88A09B8823A2C6A6003E82BE /* VTResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A09B8723A2C6A6003E82BE /* VTResponse.swift */; };
 		88A09B8D23A2CDE5003E82BE /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A09B8C23A2CDE5003E82BE /* SearchResult.swift */; };
 		88A09B8F23A2D0DF003E82BE /* PhotosResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A09B8E23A2D0DF003E82BE /* PhotosResult.swift */; };
+		88D4AA2B23AAE64600CE23B6 /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D4AA2A23AAE64600CE23B6 /* DataSource.swift */; };
 		88D616C02398161E00D0A192 /* VirtualTourPointAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D616BF2398161E00D0A192 /* VirtualTourPointAnnotation.swift */; };
 		88D616C22398350E00D0A192 /* MapKit+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D616C12398350E00D0A192 /* MapKit+Extension.swift */; };
 		88D616C42398632500D0A192 /* PhotoAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D616C32398632500D0A192 /* PhotoAlbumViewController.swift */; };
@@ -69,6 +70,7 @@
 		88A09B8723A2C6A6003E82BE /* VTResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VTResponse.swift; sourceTree = "<group>"; };
 		88A09B8C23A2CDE5003E82BE /* SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
 		88A09B8E23A2D0DF003E82BE /* PhotosResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosResult.swift; sourceTree = "<group>"; };
+		88D4AA2A23AAE64600CE23B6 /* DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
 		88D616BF2398161E00D0A192 /* VirtualTourPointAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualTourPointAnnotation.swift; sourceTree = "<group>"; };
 		88D616C12398350E00D0A192 /* MapKit+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapKit+Extension.swift"; sourceTree = "<group>"; };
 		88D616C32398632500D0A192 /* PhotoAlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAlbumViewController.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 				0D8409252397795A007FBC3D /* DataController.swift */,
 				88D616BF2398161E00D0A192 /* VirtualTourPointAnnotation.swift */,
 				88D616C12398350E00D0A192 /* MapKit+Extension.swift */,
+				88D4AA2A23AAE64600CE23B6 /* DataSource.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -349,6 +352,7 @@
 				88719322239EFF3700B31AE4 /* VTClient.swift in Sources */,
 				0D8409262397795A007FBC3D /* DataController.swift in Sources */,
 				88A09B8623A2BB4E003E82BE /* PhotoParams.swift in Sources */,
+				88D4AA2B23AAE64600CE23B6 /* DataSource.swift in Sources */,
 				8871B1162396EA40000D89DF /* MapViewController.swift in Sources */,
 				88D616C22398350E00D0A192 /* MapKit+Extension.swift in Sources */,
 				88A09B8D23A2CDE5003E82BE /* SearchResult.swift in Sources */,

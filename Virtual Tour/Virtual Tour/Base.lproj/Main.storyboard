@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Dmd-rU-mMQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Dmd-rU-mMQ">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -142,21 +142,30 @@
                                                         <constraint firstItem="iy9-6n-h5K" firstAttribute="centerY" secondItem="fYz-lE-AkL" secondAttribute="centerY" id="iI8-5p-JcI"/>
                                                     </constraints>
                                                 </view>
+                                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7B1-an-xEn">
+                                                    <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                                                    <color key="backgroundColor" white="1" alpha="0.59953520569620256" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </view>
                                             </subviews>
                                         </view>
                                         <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="7B1-an-xEn" secondAttribute="trailing" id="6EA-vn-2NO"/>
+                                            <constraint firstItem="7B1-an-xEn" firstAttribute="leading" secondItem="jPV-Lp-0g8" secondAttribute="leading" id="CR5-Ou-wDC"/>
                                             <constraint firstAttribute="bottom" secondItem="pij-ng-xXL" secondAttribute="bottom" id="Eqh-G3-SyB"/>
                                             <constraint firstItem="pij-ng-xXL" firstAttribute="top" secondItem="jPV-Lp-0g8" secondAttribute="top" id="H5r-A5-De4"/>
                                             <constraint firstAttribute="trailing" secondItem="fYz-lE-AkL" secondAttribute="trailing" constant="3" id="MqF-Z7-m4k"/>
                                             <constraint firstAttribute="bottom" secondItem="fYz-lE-AkL" secondAttribute="bottom" constant="3" id="QJw-LI-2eb"/>
                                             <constraint firstAttribute="trailing" secondItem="pij-ng-xXL" secondAttribute="trailing" id="T88-11-8CG"/>
+                                            <constraint firstAttribute="bottom" secondItem="7B1-an-xEn" secondAttribute="bottom" id="Teo-9a-740"/>
                                             <constraint firstItem="pij-ng-xXL" firstAttribute="leading" secondItem="jPV-Lp-0g8" secondAttribute="leading" id="Uz8-r4-fFt"/>
                                             <constraint firstItem="fYz-lE-AkL" firstAttribute="leading" secondItem="jPV-Lp-0g8" secondAttribute="leading" constant="3" id="WGL-QM-qZD"/>
+                                            <constraint firstItem="7B1-an-xEn" firstAttribute="top" secondItem="jPV-Lp-0g8" secondAttribute="top" id="b0K-cN-oUc"/>
                                             <constraint firstItem="fYz-lE-AkL" firstAttribute="top" secondItem="jPV-Lp-0g8" secondAttribute="top" constant="3" id="pvH-lA-dml"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="activityIndicator" destination="iy9-6n-h5K" id="wrw-cN-nIP"/>
                                             <outlet property="contentLoader" destination="fYz-lE-AkL" id="S12-Jv-p8i"/>
+                                            <outlet property="highlightIndicator" destination="7B1-an-xEn" id="tKg-ww-BCB"/>
                                             <outlet property="imageView" destination="pij-ng-xXL" id="KTF-uV-a4d"/>
                                         </connections>
                                     </collectionViewCell>

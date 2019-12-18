@@ -15,4 +15,5 @@ struct SearchParams {
     var format: String
     var nojsoncallback: String
     var per_page: Int
+    var page: Int
 }

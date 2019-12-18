@@ -21,13 +21,17 @@ class MapViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let fetchRequest: NSFetchRequest<Pin> = Pin.fetchRequest()
-        if let result = try? dataController.viewContext.fetch(fetchRequest) {
-            addPinsToMap(pins: result)
+        getCurrentLocations()
+        //updateZoomRegion()
+    }
+    
+    
+    fileprivate func getCurrentLocations() {
+        guard let result = DataSource.retrieve(entityClass: Pin.self, context: dataController.viewContext) else {
+            return
         }
         
-        //updateZoomRegion()
+        addPinsToMap(pins: result)
     }
     
     
@@ -47,6 +51,9 @@ class MapViewController: UIViewController {
             pin.longitude = myCoordinate.longitude
             pin.creationDate = Date()
             try? dataController.viewContext.save()
+            
+            //Ask for photos in that place
+            getPhotosForPlace(pinModel: pin)
             
             addPinToMap(pinModel: pin)
         }
@@ -72,12 +79,12 @@ class MapViewController: UIViewController {
         }
     }
     
-    private func updateButtonDelete(isVisible: Bool){
+    fileprivate func updateButtonDelete(isVisible: Bool){
         editButton.title = isDeletingPings ? "Done" : "Edit"
         self.animateButton(heightConstraint: isVisible ? 60 : 0)
     }
     
-    private func animateButton(heightConstraint: CGFloat) {
+    fileprivate func animateButton(heightConstraint: CGFloat) {
         DispatchQueue.main.async {
             self.labelDeleteHeightConstraint.constant = heightConstraint
             UIView.animate(withDuration: 0.2) {
@@ -86,7 +93,7 @@ class MapViewController: UIViewController {
         }
     }
     
-    private func addPinToMap(pinModel: Pin) {
+    fileprivate func addPinToMap(pinModel: Pin) {
         
         let myCoordinate: CLLocationCoordinate2D = CLLocationCoordinate2D.init(latitude: pinModel.latitude, longitude: pinModel.longitude)
         
@@ -96,31 +103,28 @@ class MapViewController: UIViewController {
         
         mapView.addAnnotation(virtualTourPin)
         
-        //Ask for photos in that place
-        getPhotosForPlace(pinModel: pinModel)
     }
     
-    private func addPinsToMap(pins:[Pin] ){
+    fileprivate func addPinsToMap(pins:[Pin] ){
         for pin in pins {
             addPinToMap(pinModel: pin)
         }
     }
     
-    private func deSelectAnnotations() {
+    fileprivate func deSelectAnnotations() {
         for annotation in mapView.selectedAnnotations {
             mapView.deselectAnnotation(annotation, animated: false)
         }
     }
     
-    private func getPhotosForPlace(pinModel: Pin) {
-        let searchParams = SearchParams(lat: pinModel.latitude, lon: pinModel.longitude, radius: 5, format: "json", nojsoncallback: "1", per_page: 21)
+    fileprivate func getPhotosForPlace(pinModel: Pin) {
+        let searchParams = SearchParams(lat: pinModel.latitude, lon: pinModel.longitude, radius: 5, format: "json", nojsoncallback: "1", per_page: 21, page: 1)
         VTClient.getSearchPhotos(params: searchParams, pinModel: pinModel, completion: handleSearchResponse(phostosResult:error:pinModel:))
     }
     
     
-    func handleSearchResponse(phostosResult: PhotosResult?, error: Error?, pinModel: Pin){
+    fileprivate func handleSearchResponse(phostosResult: PhotosResult?, error: Error?, pinModel: Pin){
         if let result = phostosResult {
-            print(result.photo.count)
             if Int(result.total) != 0 {
                 self.storePhotosOnPinLocation(result: result, pinModel: pinModel)
             }
@@ -129,7 +133,7 @@ class MapViewController: UIViewController {
         }
     }
     
-    func storePhotosOnPinLocation(result: PhotosResult, pinModel: Pin) {
+    fileprivate func storePhotosOnPinLocation(result: PhotosResult, pinModel: Pin) {
         
         storePhotoPage(result, pinModel: pinModel)
         storePhotos(result, pinModel: pinModel)

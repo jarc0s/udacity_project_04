@@ -22,7 +22,7 @@ class VTClient {
         var stringValue: String {
             switch self {
             case .searchPhoto(let searchParams): return Endpoints.baseSearch + Endpoints.apiKeyParam + "&lat=\(searchParams.lat)"
-                + "&lon=\(searchParams.lon)&radius=\(searchParams.radius)&format=\(searchParams.format)&nojsoncallback=\(searchParams.nojsoncallback)&per_page=\(searchParams.per_page)"
+                + "&lon=\(searchParams.lon)&radius=\(searchParams.radius)&format=\(searchParams.format)&nojsoncallback=\(searchParams.nojsoncallback)&per_page=\(searchParams.per_page)&page=\(searchParams.page)"
             case .getPhoto(let photoParams): return NSString(format: Endpoints.basePhoto as NSString, photoParams.farmId, photoParams.serverId, photoParams.id, photoParams.secret, photoParams.size) as String
             }
         }
