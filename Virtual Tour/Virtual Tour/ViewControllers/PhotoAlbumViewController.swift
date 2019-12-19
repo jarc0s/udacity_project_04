@@ -16,6 +16,7 @@ class PhotoAlbumViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var newCollectionButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var labelNoImages: UILabel!
     
     
     enum Mode {
@@ -57,6 +58,10 @@ class PhotoAlbumViewController: UIViewController {
         super.viewDidLoad()
         setRegionMapView()
         resource = getPhotosUrls()
+        if resource.isEmpty {
+            collectionView.isHidden = true
+            labelNoImages.isHidden = false
+        }
         collectionView.allowsMultipleSelection = true
     }
     
@@ -117,11 +122,18 @@ class PhotoAlbumViewController: UIViewController {
             return
         }
         
-        if (photoPage.page + 1) <= photoPage.pages {
-            let searchParams = SearchParams(lat: pinModel.latitude, lon: pinModel.longitude, radius: 5, format: "json", nojsoncallback: "1", per_page: 21, page: (Int(photoPage.page + 1)))
-            VTClient.getSearchPhotos(params: searchParams, pinModel: pinModel, completion: handleSearchResponse(phostosResult:error:pinModel:))
+        if photoPage.pages != 1 {
+            let number = Int.random(in: 0 ... Int(photoPage.pages))
+            
+            if number != photoPage.pages {
+                let searchParams = SearchParams(lat: pinModel.latitude, lon: pinModel.longitude, radius: 5, format: "json", nojsoncallback: "1", per_page: 21, page:number)
+                VTClient.getSearchPhotos(params: searchParams, pinModel: pinModel, completion: handleSearchResponse(phostosResult:error:pinModel:))
+            }else {
+                print("No more photos")
+            }
         }else {
-            print("No more photos")
+            collectionView.isHidden = true
+            labelNoImages.isHidden = false
         }
     }
     
@@ -135,7 +147,7 @@ class PhotoAlbumViewController: UIViewController {
         }
     }
     
-    //MARK: CoreData Actions
+    //MARK: - CoreData Actions
     fileprivate func storePhotoPage(_ result: PhotosResult) {
         let photoPage = PhotoPage(context: dataController.viewContext)
         photoPage.page = Int64(result.page)
@@ -193,81 +205,29 @@ class PhotoAlbumViewController: UIViewController {
 
     }
     
-    //MARK: -
+    //MARK: - Image
     fileprivate func performLargeImageFetch(photo: Photo, cell: PhotoCollectionViewCell){
         
         cell.activityIndicator.startAnimating()
         cell.contentLoader.isHidden = false
         
-        loadLargeImage(photo: photo) { [weak self] result in
+        VTClient.loadLargeImage(photo: photo) { result in
             cell.activityIndicator.stopAnimating()
             cell.contentLoader.isHidden = true
             
             switch result {
-            case .results(let photo):
-                cell.imageView.image = photo
+            case .results(let photoData):
+                cell.imageView.image = UIImage(data: photoData)
                 cell.imageView.isHidden = false
+                photo.imageData = photoData
+                try? self.dataController.viewContext.save()
                 return
             case .error(_), .success(_):
                 cell.imageView.image = UIImage(named: "")
                 return
             }
+            
         }
-    }
-    
-    
-    func loadLargeImage(photo: Photo, completion: @escaping (Result<UIImage>) -> Void) {
-        
-        guard let urlPhotoStr = photo.url, let urlPhoto = URL(string: urlPhotoStr) else {
-            DispatchQueue.main.async {
-                completion(Result.success(false))
-            }
-            
-            return
-        }
-        
-        let loadRequest = URLRequest(url:urlPhoto)
-        
-        URLSession.shared.dataTask(with: loadRequest) { (data, response, error) in
-            if let error = error {
-                DispatchQueue.main.async {
-                    completion(Result.error(error))
-                }
-                return
-            }
-            
-            guard let data = data else {
-                DispatchQueue.main.async {
-                    completion(Result.success(false))
-                }
-                return
-            }
-            
-            guard let returnedImage = UIImage(data: data) else {
-                DispatchQueue.main.async {
-                    completion(Result.success(false))
-                }
-                return
-            }
-            
-            photo.imageData = data
-            DispatchQueue.main.async {
-                completion(Result.results(returnedImage))
-            }
-            try? self.dataController.viewContext.save()
-            
-            }.resume()
-    }
-    
-    fileprivate func updateButtonState() {
-        var isItemSelected = false
-        for (_ , value) in dictionarySeletedIndexPath {
-            if value {
-                isItemSelected = true
-                break
-            }
-        }
-        mMode = isItemSelected ? .select : .view
     }
     
     fileprivate func deleteSelectedPhotos() {
@@ -288,9 +248,22 @@ class PhotoAlbumViewController: UIViewController {
         collectionView.deleteItems(at: deleteNeededIndexPath)
         dictionarySeletedIndexPath.removeAll()
         mMode = .view
-        
+    }
+    
+    //MARK: - States
+    fileprivate func updateButtonState() {
+        var isItemSelected = false
+        for (_ , value) in dictionarySeletedIndexPath {
+            if value {
+                isItemSelected = true
+                break
+            }
+        }
+        mMode = isItemSelected ? .select : .view
     }
 }
+
+//MARK: - MKMapViewDelegate
 
 extension PhotoAlbumViewController: MKMapViewDelegate {
     // Delegate method called when addAnnotation is done.
@@ -310,6 +283,8 @@ extension PhotoAlbumViewController: MKMapViewDelegate {
 
 }
 
+//MARK: - UICollectionViewDelegate
+
 extension PhotoAlbumViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         mMode = .select
@@ -322,6 +297,7 @@ extension PhotoAlbumViewController: UICollectionViewDelegate {
     }
 }
 
+//MARK: - UICollectionViewDataSource
 
 extension PhotoAlbumViewController: UICollectionViewDataSource {
     
@@ -362,6 +338,8 @@ extension PhotoAlbumViewController: UICollectionViewDataSource {
         return cell
     }
 }
+
+//MARK: - UICollectionViewDelegateFlowLayout
 
 extension PhotoAlbumViewController: UICollectionViewDelegateFlowLayout {
     //1

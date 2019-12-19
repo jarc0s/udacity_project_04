@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class VTClient {
     static let apiKey = "64e86546085a352e7e9aee4cf8b24096" //"YOUR_TMDB_API_KEY"
@@ -73,5 +74,54 @@ class VTClient {
                 completion(nil, error, pinModel)
             }
         }
+    }
+    
+    
+    class func loadLargeImage(photo: Photo, completion: @escaping (Result<Data>) -> Void) {
+        
+        guard let urlPhotoStr = photo.url, let urlPhoto = URL(string: urlPhotoStr) else {
+            DispatchQueue.main.async {
+                completion(Result.success(false))
+            }
+            
+            return
+        }
+        
+        let loadRequest = URLRequest(url:urlPhoto)
+        
+        URLSession.shared.dataTask(with: loadRequest) { (data, response, error) in
+            if let error = error {
+                DispatchQueue.main.async {
+                    completion(Result.error(error))
+                }
+                return
+            }
+            
+            guard let data = data else {
+                DispatchQueue.main.async {
+                    completion(Result.success(false))
+                }
+                return
+            }
+            
+            
+            DispatchQueue.main.async {
+                completion(Result.results(data))
+            }
+            
+            /*guard let returnedImage = UIImage(data: data) else {
+                DispatchQueue.main.async {
+                    completion(Result.success(false))
+                }
+                return
+            }
+            
+            photo.imageData = data
+            DispatchQueue.main.async {
+                completion(Result.results(returnedImage))
+            }
+            try? self.dataController.viewContext.save()
+            */
+        }.resume()
     }
 }
